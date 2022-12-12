@@ -344,10 +344,12 @@ void HashTable<K,V,Prober,Hash,KEqual>::insert(const ItemType& p)
     {
         delete table_[h]; // delete the pointer first
     }
+    else { // only adjust size if this is not a duplicate 
+        ++size_;
+        ++totalOccupieds_;
+    }
 
     table_[h] = new HashItem(p);
-    ++size_;
-    ++totalOccupieds_;
 }
     
 
