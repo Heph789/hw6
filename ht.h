@@ -307,8 +307,12 @@ HashTable<K,V,Prober,Hash,KEqual>::HashTable(
 template<typename K, typename V, typename Prober, typename Hash, typename KEqual>
 HashTable<K,V,Prober,Hash,KEqual>::~HashTable()
 {
-    // just have deallocate the pointers in the vector probably
-
+    // just have deallocate the pointers in the vector 
+    for (size_t i = 0; i < CAPACITIES[mIndex_]; ++i)
+    {
+        delete table_[i];
+        table_[i] = nullptr;
+    }
 }
 
 // To be completed

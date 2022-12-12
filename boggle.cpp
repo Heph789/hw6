@@ -95,9 +95,8 @@ bool boggleHelper(const std::set<std::string>& dict, const std::set<std::string>
 								   std::string word, std::set<std::string>& result, unsigned int r, unsigned int c, int dr, int dc)
 {
 //add your solution here!
-	if (prefix.find(word) == prefix.end()) return false; // not a prefix, so no need to keep going down this path
 
-	if (r < board.size() && c < board[0].size() && boggleHelper(dict, prefix, board, (word+board[r][c]), result, r+dr, c+dc, dr, dc)) // if we find a bigger word, return true. No need to do anything
+	if (r < board.size() && c < board[0].size() && prefix.find(word) != prefix.end() && boggleHelper(dict, prefix, board, (word+board[r][c]), result, r+dr, c+dc, dr, dc)) // if we find a bigger word, return true. No need to do anything
 	{
 		return true;
 	}
