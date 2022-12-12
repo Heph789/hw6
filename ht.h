@@ -336,11 +336,20 @@ void HashTable<K,V,Prober,Hash,KEqual>::insert(const ItemType& p)
 
     HASH_INDEX_T h = this->probe(p.first);
     
-    if (h == npos || table_[h] != nullptr) return;
+    if (h == npos) {
+        throw std::logic_error;
+    }
+
+    if (table_[h] != nullptr) // a duplicate
+    {
+        delete table_[h]; // delete the pointer first
+    }
+
     table_[h] = new HashItem(p);
     ++size_;
     ++totalOccupieds_;
 }
+    
 
 // To be completed
 template<typename K, typename V, typename Prober, typename Hash, typename KEqual>
