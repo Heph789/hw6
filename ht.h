@@ -359,7 +359,7 @@ void HashTable<K,V,Prober,Hash,KEqual>::remove(const KeyType& key)
 {
     HashItem* hi = this->internalFind(key);
     if (hi == nullptr) return;
-    hi->deleted = false;
+    hi->deleted = true;
     --size_;
 }
 
