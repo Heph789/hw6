@@ -9,6 +9,8 @@
 
 #include "boggle.h"
 
+using namespace std;
+
 std::vector<std::vector<char> > genBoard(unsigned int n, int seed)
 {
 	//random number generator
@@ -93,5 +95,17 @@ bool boggleHelper(const std::set<std::string>& dict, const std::set<std::string>
 								   std::string word, std::set<std::string>& result, unsigned int r, unsigned int c, int dr, int dc)
 {
 //add your solution here!
+	if (prefix.find(word) == prefix.end()) return false; // not a prefix, so no need to keep going down this path
 
+	if (r < board.size() && c < board[0].size() && boggleHelper(dict, prefix, board, (word+board[r][c]), result, r+dr, c+dc, dr, dc)) // if we find a bigger word, return true. No need to do anything
+	{
+		return true;
+	}
+	// if we don't find a bigger word, then either this is the biggest word (if it is a word), or we stop going down this path
+	if (dict.find(word) != dict.end())
+	{
+		result.insert(word);
+		return true;
+	}
+	return false;
 }
