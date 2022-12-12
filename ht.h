@@ -337,7 +337,7 @@ void HashTable<K,V,Prober,Hash,KEqual>::insert(const ItemType& p)
     HASH_INDEX_T h = this->probe(p.first);
     
     if (h == npos) {
-        throw std::logic_error;
+        throw std::logic_error("No room to insert key.");
     }
 
     if (table_[h] != nullptr) // a duplicate
