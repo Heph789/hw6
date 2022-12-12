@@ -438,12 +438,15 @@ void HashTable<K,V,Prober,Hash,KEqual>::resize()
 
     ++mIndex_;
     table_.resize(CAPACITIES[mIndex_], nullptr);
+    size_ = 0;
+    totalOccupieds_ = 0;
     for (size_t i = 0; i < temp.size(); ++i)
     {
         // std::cerr << (temp[i]->item).first << ", " << (temp[i]->item).first << std::endl;
         insert(temp[i]->item);
         delete temp[i];
     }
+    // std::cerr << "resized" << std::endl;
 }
 
 // Almost complete
